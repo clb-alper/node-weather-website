@@ -12,7 +12,7 @@ const forecast = (lt, lg, callback) => {
         } else if (body.error) {
             callback('Unable to find a location. Please try another search', undefined);
         } else {
-            callback(undefined, body.current.weather_descriptions[0]+ '. Its currently ' + body.current.temperature + ' degree out! +' +'Humidity:'+ body.current.humidity +' )
+            callback(undefined, body.current.weather_descriptions[0]+ '. Its currently ' + body.current.temperature + ' degree out! ' +'Humidity:'+ body.current.humidity)
         }
     })
 
