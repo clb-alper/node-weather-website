@@ -3,9 +3,10 @@ const express = require('express');
 const hbs = require('hbs');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
+const tokenbalance = require('./utils/tokenbalance')
 
 const app = express();
-const port = process.env.PORT || 3003
+const port = process.env.PORT || 3004
 
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -41,6 +42,22 @@ app.get('/help', (req,res)=>{
         helpText: 'Some help text',
         title: 'Help',
         name: 'Andrew Mead'
+    })
+})
+
+app.get('/unlistedtokens', (req,res)=>{
+    if(!req.query.address){
+        return res.send({
+            error: 'You must provide addresss'
+        })
+    }
+    console.log('1')
+
+    tokenbalance(req.query.address,(error, result)=>{
+        if(error){
+            return res.send({ error })
+        }
+        console.log(result)
     })
 })
 
